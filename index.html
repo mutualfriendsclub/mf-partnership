@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mutual Friends &mdash; Partner With Us</title>
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/lora@5/index.min.css" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #F5EFE0; --rust: #B5431A; --brown: #3D1F0A; --teal: #1B5E52;
+  --amber: #D4890A; --sand: #E8DEC8; --offwhite: #FDFAF4; --muted: #7A6A55;
+}
+html { scroll-behavior: smooth; }
+body { font-family: Georgia, 'Times New Roman', serif; background: var(--cream); color: var(--brown); overflow-x: hidden; }
+.sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+
+/* HIDDEN ADMIN */
+.edit-panel { display: none; background: var(--brown); padding: 1.2rem 1.5rem; border-bottom: 2px solid var(--amber); }
+.edit-panel.open { display: block; }
+.edit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; max-width: 800px; margin: 0 auto; }
+.edit-field label { display: block; font-size: 10px; color: var(--amber); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; font-family: Arial, sans-serif; }
+.edit-field input { width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 6px 8px; font-size: 13px; color: var(--cream); font-family: inherit; outline: none; }
+.save-btn { display: block; margin: 10px auto 0; background: var(--amber); color: var(--brown); border: none; border-radius: 6px; padding: 7px 20px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: Arial, sans-serif; }
+
+/* NAV */
+nav { background: rgba(245,239,224,0.96); border-bottom: 1px solid var(--sand); padding: 14px 2rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.nav-logo { font-family: Georgia, serif; font-size: 16px; font-weight: 700; color: var(--rust); }
+.nav-cta { background: var(--rust); color: var(--offwhite); border: none; border-radius: 100px; padding: 9px 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Arial, sans-serif; text-decoration: none; transition: background 0.2s; }
+.nav-cta:hover { background: var(--brown); }
+
+/* HERO */
+.hero { padding: 5rem 2rem 4rem; max-width: 1000px; margin: 0 auto; }
+.eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); font-weight: 700; margin-bottom: 1rem; font-family: Arial, sans-serif; }
+.hero-title { font-family: Georgia, serif; font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 700; line-height: 0.95; letter-spacing: -2px; color: var(--brown); margin-bottom: 1.5rem; }
+.hero-title em { font-style: italic; color: var(--rust); }
+.hero-sub { font-size: 16px; color: var(--muted); max-width: 480px; line-height: 1.7; margin-bottom: 2rem; font-family: Arial, sans-serif; }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-p { background: var(--rust); color: var(--offwhite); border: none; border-radius: 100px; padding: 12px 26px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: Arial, sans-serif; text-decoration: none; display: inline-block; transition: background 0.2s; }
+.btn-p:hover { background: var(--brown); }
+.btn-o { background: transparent; color: var(--brown); border: 1.5px solid var(--brown); border-radius: 100px; padding: 11px 24px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: Arial, sans-serif; text-decoration: none; display: inline-block; transition: all 0.2s; }
+.btn-o:hover { background: var(--brown); color: var(--offwhite); }
+
+/* TICKER */
+.ticker-wrap { background: var(--rust); overflow: hidden; padding: 11px 0; }
+.ticker { display: flex; animation: tick 28s linear infinite; white-space: nowrap; }
+.t-item { font-size: 13px; font-style: italic; color: var(--cream); padding: 0 1.5rem; font-family: Georgia, serif; }
+.t-dot { color: var(--amber); padding: 0 0.3rem; }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* SECTIONS */
+.sec { padding: 5rem 2rem; }
+.sec-inner { max-width: 1000px; margin: 0 auto; }
+.sec-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); font-weight: 700; margin-bottom: 10px; font-family: Arial, sans-serif; }
+.sec-title { font-family: Georgia, serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; line-height: 1.1; letter-spacing: -1px; color: var(--brown); margin-bottom: 1.2rem; }
+.sec-title em { font-style: italic; color: var(--rust); }
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+@media (max-width: 680px) { .about-grid { grid-template-columns: 1fr; gap: 2rem; } }
+.about-text p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-family: Arial, sans-serif; }
+.about-text p strong { color: var(--brown); }
+.belief-box { background: var(--rust); border-radius: 16px; padding: 2rem; }
+.belief-box blockquote { font-family: Georgia, serif; font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-style: italic; font-weight: 700; color: var(--cream); line-height: 1.5; }
+.belief-box cite { display: block; margin-top: 12px; font-size: 11px; color: rgba(245,239,224,0.6); letter-spacing: 1px; font-style: normal; text-transform: uppercase; font-family: Arial, sans-serif; }
+
+/* STATS */
+.stats-sec { background: var(--brown); }
+.stats-sec .sec-title { color: var(--cream); }
+.stats-sec .sec-title em { color: var(--amber); }
+.stats-sec .sec-label { color: var(--amber); }
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden; margin-top: 2rem; }
+@media (max-width: 680px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+.stat-box { padding: 2rem 1.5rem; background: rgba(255,255,255,0.03); text-align: center; }
+.stat-box a { text-decoration: none; display: block; }
+.stat-num { font-family: Georgia, serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; color: var(--amber); letter-spacing: -1px; line-height: 1; }
+.stat-lbl { font-size: 12px; color: rgba(245,239,224,0.55); margin-top: 5px; font-family: Arial, sans-serif; }
+.stat-sub { font-size: 11px; color: rgba(245,239,224,0.35); margin-top: 3px; font-family: Arial, sans-serif; }
+.stat-box a:hover .stat-num { color: #EF9F27; }
+
+/* AUDIENCE */
+.aud-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+@media (max-width: 680px) { .aud-grid { grid-template-columns: 1fr; } }
+.aud-card { background: var(--offwhite); border-radius: 14px; padding: 1.5rem; border: 1px solid var(--sand); }
+.aud-card h3 { font-size: 15px; font-weight: 700; color: var(--brown); margin-bottom: 1rem; font-family: Arial, sans-serif; }
+.age-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.age-lbl { font-size: 12px; color: var(--muted); width: 45px; flex-shrink: 0; font-family: Arial, sans-serif; }
+.age-bar { height: 7px; border-radius: 4px; }
+.age-pct { font-size: 12px; font-weight: 700; color: var(--brown); width: 36px; font-family: Arial, sans-serif; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { background: var(--sand); border-radius: 100px; padding: 5px 12px; font-size: 12px; color: var(--brown); font-family: Arial, sans-serif; }
+.tag.hi { background: var(--rust); color: var(--offwhite); }
+
+/* PARTNERSHIP TYPES */
+.sand-bg { background: var(--sand); }
+.ptypes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; }
+@media (max-width: 680px) { .ptypes { grid-template-columns: 1fr; } }
+.ptype { background: var(--offwhite); border-radius: 14px; padding: 1.5rem; border: 1px solid var(--sand); }
+.ptype-icon { font-size: 18px; margin-bottom: 10px; color: var(--amber); }
+.ptype h3 { font-size: 15px; font-weight: 700; color: var(--brown); margin-bottom: 6px; font-family: Arial, sans-serif; }
+.ptype p { font-size: 13px; color: var(--muted); line-height: 1.6; font-family: Arial, sans-serif; }
+
+/* CASE STUDIES */
+.cases-sec { background: var(--sand); }
+.cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2rem; }
+@media (max-width: 680px) { .cases-grid { grid-template-columns: 1fr; } }
+.case-card { background: var(--offwhite); border-radius: 16px; overflow: hidden; border: 1px solid rgba(61,31,10,0.08); }
+.case-head { padding: 1.5rem; }
+.case-head.teal { background: var(--teal); }
+.case-head.rust { background: var(--rust); }
+.case-collab { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 6px; font-family: Arial, sans-serif; }
+.case-title { font-size: 17px; font-weight: 700; color: var(--offwhite); line-height: 1.3; font-family: Georgia, serif; }
+.case-body { padding: 1.5rem; }
+.case-stats { display: flex; gap: 1.5rem; margin-bottom: 1rem; }
+.case-stat-num { font-size: 22px; font-weight: 700; color: var(--rust); font-family: Georgia, serif; }
+.case-stat-lbl { font-size: 11px; color: var(--muted); font-family: Arial, sans-serif; }
+.case-body p { font-size: 13px; color: var(--muted); line-height: 1.7; font-family: Arial, sans-serif; }
+.case-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.case-tag { background: var(--sand); border-radius: 100px; padding: 3px 10px; font-size: 11px; color: var(--brown); font-family: Arial, sans-serif; }
+
+/* BRANDS */
+.brands-sec { padding: 4rem 0; }
+.brands-sec .sec-inner { padding: 0 2rem; }
+.brands-intro { font-size: 15px; color: var(--muted); max-width: 500px; line-height: 1.7; margin-top: 10px; font-family: Arial, sans-serif; }
+.marquee-wrap { overflow: hidden; margin-top: 2rem; }
+.marquee { display: flex; gap: 10px; animation: mq 32s linear infinite; white-space: nowrap; }
+.brand-pill { background: var(--offwhite); border: 1px solid var(--sand); border-radius: 100px; padding: 8px 18px; font-size: 13px; font-weight: 600; color: var(--brown); white-space: nowrap; flex-shrink: 0; font-family: Arial, sans-serif; }
+@keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* CTA */
+.cta-sec { background: var(--rust); text-align: center; padding: 5rem 2rem; }
+.cta-sec .sec-label { color: rgba(245,239,224,0.45); }
+.cta-sec .sec-title { color: var(--cream); font-size: clamp(2.5rem, 6vw, 4.5rem); }
+.cta-sec .sec-title em { color: var(--amber); }
+.cta-sub { font-size: 16px; color: rgba(245,239,224,0.75); max-width: 460px; margin: 0 auto 2rem; line-height: 1.7; font-family: Arial, sans-serif; }
+.cta-btn { display: inline-block; background: var(--cream); color: var(--rust); border-radius: 100px; padding: 14px 36px; font-size: 15px; font-weight: 700; text-decoration: none; font-family: Arial, sans-serif; }
+.cta-note { margin-top: 12px; font-size: 12px; color: rgba(245,239,224,0.5); font-family: Arial, sans-serif; }
+
+/* FOOTER */
+footer { background: var(--brown); padding: 2rem; text-align: center; }
+footer p { font-size: 12px; color: rgba(245,239,224,0.4); font-family: Arial, sans-serif; }
+footer a { color: rgba(245,239,224,0.6); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- HIDDEN ADMIN — press Shift+Ctrl+E to open -->
+<div class="edit-panel" id="ep">
+  <div class="edit-grid">
+    <div class="edit-field"><label>Instagram</label><input id="e-ig" value="8,200+" /></div>
+    <div class="edit-field"><label>TikTok</label><input id="e-tt" value="9,100+" /></div>
+    <div class="edit-field"><label>WA members</label><input id="e-wa" value="1,900+" /></div>
+    <div class="edit-field"><label>Engagement rate</label><input id="e-eng" value="9.3%" /></div>
+    <div class="edit-field"><label>Avg saves</label><input id="e-saves" value="40&ndash;70" /></div>
+    <div class="edit-field"><label>Attendees/event</label><input id="e-att" value="30&ndash;70" /></div>
+  </div>
+  <button class="save-btn" onclick="saveStats()">save &amp; update</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">mutual___friends</div>
+  <a href="https://wa.me/6285121266721" class="nav-cta">let&rsquo;s work together</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow">Jakarta&rsquo;s social community</div>
+  <h1 class="hero-title">where strangers<br>become <em>friends.</em></h1>
+  <p class="hero-sub">Mutual Friends is Jakarta&rsquo;s fastest-growing social community &mdash; 1,900 paying members, sold-out events, and a room full of people who actually show up. Here&rsquo;s why brands love being part of it.</p>
+  <div class="btn-row">
+    <a href="https://wa.me/6285121266721" class="btn-p">partner with us</a>
+    <a href="#cases" class="btn-o">see past collabs</a>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="t-item">connecting strangers into friends</span><span class="t-dot">&#10022;</span>
+    <span class="t-item">Jakarta&rsquo;s social community</span><span class="t-dot">&#10022;</span>
+    <span class="t-item">events that sell out in under 1 hour</span><span class="t-dot">&#10022;</span>
+    <span class="t-item">9.3% engagement rate</span><span class="t-dot">&#10022;</span>
+    <span class="t-item">your brand lives inside the moment</span><span class="t-dot">&#10022;</span>
+    <span class="t-item">connecting strangers into friends</span><span class="t-dot">&#10022;</span>
+    <span class="t-item">Jakarta&rsquo;s social community</span><span class="t-dot">&#10022;</span>
+    <span class="t-item">events that sell out in under 1 hour</span><span class="t-dot">&#10022;</span>
+    <span class="t-item">9.3% engagement rate</span><span class="t-dot">&#10022;</span>
+    <span class="t-item">your brand lives inside the moment</span><span class="t-dot">&#10022;</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="sec">
+  <div class="sec-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="sec-label">who we are</div>
+        <h2 class="sec-title">born from one<br><em>simple belief.</em></h2>
+        <p>Mutual Friends was born from one simple belief: <strong>no one should feel like a stranger.</strong></p>
+        <p>Based in Jakarta, we create offline events and an online community where people meet, share, and turn moments into lasting friendships. No niche, no filter &mdash; just intentional design that makes connection feel natural.</p>
+        <p>Our events aren&rsquo;t just social gatherings. They&rsquo;re <strong>curated experiences</strong> where brands live authentically inside the moment &mdash; not on top of it.</p>
+      </div>
+      <div class="belief-box">
+        <blockquote>&ldquo;we design genuine human moments in Jakarta where anyone can walk in alone and leave feeling like they belong &mdash; and brands live inside that, not on top of it.&rdquo;</blockquote>
+        <cite>&mdash; mutual friends</cite>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="sec stats-sec">
+  <div class="sec-inner">
+    <div class="sec-label">the numbers</div>
+    <h2 class="sec-title">a community that <em>shows up.</em></h2>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <a href="https://instagram.com/mutual___friends" target="_blank">
+          <div class="stat-num" id="s-ig">8,200+</div>
+          <div class="stat-lbl">Instagram followers</div>
+          <div class="stat-sub">@mutual___friends &#8599;</div>
+        </a>
+      </div>
+      <div class="stat-box">
+        <a href="https://tiktok.com/@mutual___friends" target="_blank">
+          <div class="stat-num" id="s-tt">9,100+</div>
+          <div class="stat-lbl">TikTok followers</div>
+          <div class="stat-sub">@mutual___friends &#8599;</div>
+        </a>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="s-wa">1,900+</div>
+        <div class="stat-lbl">paying WA members</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="s-eng">9.3%</div>
+        <div class="stat-lbl">engagement rate</div>
+        <div class="stat-sub">avg across platforms</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" style="font-size:clamp(1.4rem,2.5vw,2.2rem)"><span id="s-saves">40&ndash;70</span></div>
+        <div class="stat-lbl">avg saves per post</div>
+        <div class="stat-sub"><span id="s-att">30&ndash;70</span> attendees per event</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" style="font-size:clamp(1.4rem,2.5vw,2.2rem)">2&ndash;4x</div>
+        <div class="stat-lbl">events per month</div>
+        <div class="stat-sub">most sell out in under 1 hour</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUDIENCE -->
+<div class="sec">
+  <div class="sec-inner">
+    <div class="sec-label">who&rsquo;s in the room</div>
+    <h2 class="sec-title">your audience,<br><em>already here.</em></h2>
+    <div class="aud-grid">
+      <div class="aud-card">
+        <h3>age range</h3>
+        <div class="age-row"><span class="age-lbl">25&ndash;29</span><div class="age-bar" style="width:52%;background:var(--rust)"></div><span class="age-pct">52%</span></div>
+        <div class="age-row"><span class="age-lbl">20&ndash;24</span><div class="age-bar" style="width:27%;background:var(--amber)"></div><span class="age-pct">27%</span></div>
+        <div class="age-row"><span class="age-lbl">30&ndash;34</span><div class="age-bar" style="width:16%;background:var(--teal)"></div><span class="age-pct">16%</span></div>
+        <div class="age-row"><span class="age-lbl">35&ndash;40</span><div class="age-bar" style="width:5%;background:var(--sand)"></div><span class="age-pct">5%</span></div>
+      </div>
+      <div class="aud-card">
+        <h3>who they are</h3>
+        <div class="tag-row">
+          <span class="tag hi">young professionals</span>
+          <span class="tag hi">majority female</span>
+          <span class="tag">South Jakarta</span>
+          <span class="tag">Central Jakarta</span>
+          <span class="tag">sports &amp; wellness</span>
+          <span class="tag">arts &amp; music</span>
+          <span class="tag">trend-savvy</span>
+          <span class="tag">socially curious</span>
+          <span class="tag">mostly single</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PARTNERSHIP TYPES -->
+<div class="sec sand-bg">
+  <div class="sec-inner">
+    <div class="sec-label">how we work together</div>
+    <h2 class="sec-title">four ways to<br><em>collaborate.</em></h2>
+    <div class="ptypes">
+      <div class="ptype">
+        <div class="ptype-icon">&#10022;</div>
+        <h3>brand sponsorship</h3>
+        <p>Your brand woven into an existing MF event &mdash; logo presence, product sampling, content integration, and community endorsement that feels native, never transactional.</p>
+      </div>
+      <div class="ptype">
+        <div class="ptype-icon">&#9675;</div>
+        <h3>co-created events</h3>
+        <p>We design and execute a custom event built around your brand story. Concept to crowd &mdash; everything curated for your audience goals.</p>
+      </div>
+      <div class="ptype">
+        <div class="ptype-icon">&#9672;</div>
+        <h3>product activation</h3>
+        <p>Product launches, sampling, or experiential activations inside a live MF event. Your product meets people in a moment of genuine openness.</p>
+      </div>
+      <div class="ptype">
+        <div class="ptype-icon">&#9671;</div>
+        <h3>venue partnership</h3>
+        <p>Bring MF to your space. We fill your venue with engaged young professionals and handle the entire event &mdash; you host, we bring the crowd.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CASE STUDIES -->
+<div class="sec cases-sec" id="cases">
+  <div class="sec-inner">
+    <div class="sec-label">past collabs</div>
+    <h2 class="sec-title">brands that trusted<br><em>the room.</em></h2>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-head teal">
+          <div class="case-collab">MF &times; Roamin Rabbit</div>
+          <div class="case-title">Around the World: Trivia Night &amp; Tunes</div>
+        </div>
+        <div class="case-body">
+          <div class="case-stats">
+            <div><div class="case-stat-num">~90</div><div class="case-stat-lbl">attendees</div></div>
+            <div><div class="case-stat-num">~300</div><div class="case-stat-lbl">sign-up entries</div></div>
+          </div>
+          <p>Roamin Rabbit (global eSIM) partnered with us to launch in the Indonesian market. We designed a travel-themed trivia night at DND Bar, Gunawarman &mdash; sign-up gated behind app download, nearly 90 young professionals in the room.</p>
+          <div class="case-tags">
+            <span class="case-tag">co-created event</span>
+            <span class="case-tag">trivia format</span>
+            <span class="case-tag">user acquisition</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-head rust">
+          <div class="case-collab">MF &times; Warner Music Indonesia</div>
+          <div class="case-title">Journaling: Healing Through Heartbreak</div>
+        </div>
+        <div class="case-body">
+          <div class="case-stats">
+            <div><div class="case-stat-num">60</div><div class="case-stat-lbl">key attendees</div></div>
+            <div><div class="case-stat-num">300+</div><div class="case-stat-lbl">sign-up entries</div></div>
+          </div>
+          <p>Warner Music Indonesia partnered with us to drive awareness for emerging artist Sombr. An immersive journaling session at Mercure Hotel &mdash; capturing Gen Z music enthusiasts through genuine emotional experience.</p>
+          <div class="case-tags">
+            <span class="case-tag">brand activation</span>
+            <span class="case-tag">artist launch</span>
+            <span class="case-tag">experiential</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BRANDS -->
+<div class="brands-sec">
+  <div class="sec-inner">
+    <div class="sec-label">trusted by</div>
+    <h2 class="sec-title">brands we&rsquo;ve<br><em>worked with.</em></h2>
+    <p class="brands-intro">From F&amp;B to tech to lifestyle &mdash; brands across every category, all wanting to reach Jakarta&rsquo;s young professionals in a moment that matters.</p>
+  </div>
+  <div class="marquee-wrap">
+    <div class="marquee">
+      <span class="brand-pill">Kura Kura</span><span class="brand-pill">Santai Hard Seltzer</span><span class="brand-pill">The Coach Restaurant</span><span class="brand-pill">TAKA</span><span class="brand-pill">% Arabica</span><span class="brand-pill">Indomie</span><span class="brand-pill">Warner Music Indonesia</span><span class="brand-pill">Grab Dine Out</span><span class="brand-pill">SYMA</span><span class="brand-pill">Way of Evergreen</span><span class="brand-pill">Greenara</span><span class="brand-pill">Hause Rooftop</span><span class="brand-pill">Ms. Jackson</span><span class="brand-pill">Kancha Tea Hub</span><span class="brand-pill">ERHA Skinsitive</span><span class="brand-pill">KUYY</span><span class="brand-pill">Kopikina</span><span class="brand-pill">Shibasaki Ramen</span><span class="brand-pill">Alterego</span><span class="brand-pill">Mercure Hotel</span><span class="brand-pill">Fried Club</span><span class="brand-pill">Resolute Pilates</span><span class="brand-pill">CRU</span><span class="brand-pill">JURA</span><span class="brand-pill">Roamin Rabbit</span><span class="brand-pill">Kleveru</span><span class="brand-pill">APON</span><span class="brand-pill">K-Life</span><span class="brand-pill">Huckleberry Friend</span><span class="brand-pill">SOCO Network</span>
+      <span class="brand-pill">Kura Kura</span><span class="brand-pill">Santai Hard Seltzer</span><span class="brand-pill">The Coach Restaurant</span><span class="brand-pill">TAKA</span><span class="brand-pill">% Arabica</span><span class="brand-pill">Indomie</span><span class="brand-pill">Warner Music Indonesia</span><span class="brand-pill">Grab Dine Out</span><span class="brand-pill">SYMA</span><span class="brand-pill">Way of Evergreen</span><span class="brand-pill">Greenara</span><span class="brand-pill">Hause Rooftop</span><span class="brand-pill">Ms. Jackson</span><span class="brand-pill">Kancha Tea Hub</span><span class="brand-pill">ERHA Skinsitive</span><span class="brand-pill">KUYY</span><span class="brand-pill">Kopikina</span><span class="brand-pill">Shibasaki Ramen</span><span class="brand-pill">Alterego</span><span class="brand-pill">Mercure Hotel</span><span class="brand-pill">Fried Club</span><span class="brand-pill">Resolute Pilates</span><span class="brand-pill">CRU</span><span class="brand-pill">JURA</span><span class="brand-pill">Roamin Rabbit</span><span class="brand-pill">Kleveru</span><span class="brand-pill">APON</span><span class="brand-pill">K-Life</span><span class="brand-pill">Huckleberry Friend</span><span class="brand-pill">SOCO Network</span>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="sec cta-sec">
+  <div class="sec-label">let&rsquo;s work together</div>
+  <h2 class="sec-title">let&rsquo;s be<br><em>friends.</em></h2>
+  <p class="cta-sub">Tell us about your brand and what you&rsquo;re trying to achieve. We&rsquo;ll come back with an idea worth getting excited about.</p>
+  <a href="https://wa.me/6285121266721?text=Hi%20Bella!%20I'm%20interested%20in%20partnering%20with%20Mutual%20Friends." class="cta-btn">message us on WhatsApp</a>
+  <p class="cta-note">+62 851-2126-6721 &nbsp;&middot;&nbsp; heyletsbemutuals@gmail.com</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 mutual___friends &nbsp;&middot;&nbsp; Jakarta &nbsp;&middot;&nbsp; <a href="https://instagram.com/mutual___friends" target="_blank">@mutual___friends</a></p>
+</footer>
+
+<script>
+function saveStats() {
+  document.getElementById('s-ig').textContent = document.getElementById('e-ig').value;
+  document.getElementById('s-tt').textContent = document.getElementById('e-tt').value;
+  document.getElementById('s-wa').textContent = document.getElementById('e-wa').value;
+  document.getElementById('s-eng').textContent = document.getElementById('e-eng').value;
+  document.getElementById('s-saves').textContent = document.getElementById('e-saves').value;
+  document.getElementById('s-att').textContent = document.getElementById('e-att').value;
+  document.getElementById('ep').classList.remove('open');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.shiftKey && e.ctrlKey && e.key === 'E') {
+    document.getElementById('ep').classList.toggle('open');
+  }
+});
+</script>
+</body>
+</html>
